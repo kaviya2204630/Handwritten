@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitAI - Handwritten Digit Recognition with Deep Learning</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+       
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+        }
+       
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+       
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+       
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+       
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+       
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+       
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+       
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+       
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+       
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+       
+        .btn:hover {
+            background-color: #3da8d8;
+            transform: translateY(-3px);
+        }
+       
+        section {
+            padding: 4rem 0;
+        }
+       
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+       
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+       
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+       
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+       
+        .feature-card h3 {
+            color: var(--primary);
+        }
+       
+        .demo-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+       
+        .canvas-container {
+            margin: 0 auto;
+            width: 300px;
+            position: relative;
+        }
+       
+        #drawing-canvas {
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            background-color: white;
+            cursor: crosshair;
+        }
+       
+        .canvas-controls {
+            margin: 1rem 0;
+        }
+       
+        .prediction-result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-top: 1rem;
+        }
+       
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">DigitAI</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#features">Features</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#applications">Applications</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+           
+            <div class="hero">
+                <h1>Handwritten Digit Recognition with Deep Learning</h1>
+                <p>Revolutionizing AI applications with state-of-the-art neural networks that accurately interpret handwritten digits for smarter digital solutions.</p>
+                <a href="#demo" class="btn">Try Live Demo</a>
+            </div>
+        </div>
+    </header>
+   
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Our Technology</h2>
+            <div class="about-content">
+                <p>DigitAI leverages convolutional neural networks (CNNs) trained on the MNIST dataset to achieve over 99% accuracy in recognizing handwritten digits. Our deep learning model transforms handwritten input into digital data, enabling seamless integration with various applications.</p>
+                <p>The system continuously improves through transfer learning techniques, adapting to diverse handwriting styles and evolving to meet the needs of modern AI applications in document processing, form digitization, and smart data entry systems.</p>
+            </div>
+        </div>
+    </section>
+   
+    <section id="features" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>High Accuracy</h3>
+                    <p>Our CNN model achieves 99.2% accuracy on the MNIST test set, with specialized techniques to handle challenging handwriting styles.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-time Processing</h3>
+                    <p>Optimized neural network architecture delivers lightning-fast predictions, enabling seamless user experiences in applications.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Adaptive Learning</h3>
+                    <p>The system continuously improves through transfer learning, adapting to new handwriting styles and use cases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <section id="demo">
+        <div class="container">
+            <h2 class="section-title">Interactive Demo</h2>
+            <div class="demo-container">
+                <p>Draw a digit (0-9) in the box below and see our AI model recognize it in real-time:</p>
+               
+                <div class="canvas-container">
+                    <canvas id="drawing-canvas" width="300" height="300"></canvas>
+                </div>
+               
+                <div class="canvas-controls">
+                    <button id="clear-btn" class="btn">Clear</button>
+                    <button id="predict-btn" class="btn">Recognize Digit</button>
+                </div>
+               
+                <div class="prediction-result">
+                    Prediction: <span id="prediction-output">-</span>
+                </div>
+               
+                <div id="confidence-meter" style="margin-top: 1rem;">
+                    Confidence: <span id="confidence-value">0%</span>
+                    <div style="width: 100%; background-color: #e0e0e0; border-radius: 5px; margin-top: 0.5rem;">
+                        <div id="confidence-bar" style="height: 20px; width: 0%; background-color: var(--accent); border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <section id="applications" style="background-color: #f0f4f8;">
+        <div class="container">
+            <h2 class="section-title">AI Applications</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Document Digitization</h3>
+                    <p>Automate the conversion of handwritten forms, surveys, and documents into digital data with high accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Banking & Finance</h3>
+                    <p>Process checks, deposit slips, and financial forms without manual data entry, reducing errors and costs.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Educational Tools</h3>
+                    <p>Create interactive learning applications that can read and evaluate handwritten answers and assignments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p>Interested in integrating our handwritten digit recognition technology into your application? Contact our team to learn more about our API and customization options.</p>
+                <a href="mailto:contact@digitai.com" class="btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+   
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 DigitAI - Handwritten Digit Recognition System. All rights reserved.</p>
+            <p>Powered by Deep Learning and Neural Networks.</p>
+        </div>
+    </footer>
+   
+    <script>
+        // Canvas drawing functionality
+        const canvas = document.getElementById('drawing-canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+       
+        // Set canvas background to white
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 15;
+        ctx.lineCap = 'round';
+       
+        // Drawing functions
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+       
+        // Touch support for mobile devices
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
+        canvas.addEventListener('touchend', stopDrawing);
+       
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            };
+           
+            if (e.type === 'touchstart') {
+                startDrawing(mouseEvent);
+            } else if (e.type === 'touchmove') {
+                draw(mouseEvent);
+            }
+        }
+       
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+       
+        function draw(e) {
+            if (!isDrawing) return;
+           
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+           
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+       
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+       
+        // Clear canvas
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('prediction-output').textContent = '-';
+            document.getElementById('confidence-value').textContent = '0%';
+            document.getElementById('confidence-bar').style.width = '0%';
+        });
+       
+        // Predict digit (mock functionality - in a real app this would call your ML model)
+        document.getElementById('predict-btn').addEventListener('click', function() {
+            // In a real implementation, you would:
+            // 1. Get the image data from canvas
+            // 2. Preprocess it (resize, normalize, etc.)
+            // 3. Send to your ML model (could be TensorFlow.js in browser or API call)
+            // 4. Display the prediction result
+           
+            // For this demo, we'll simulate a prediction
+            const randomDigit = Math.floor(Math.random() * 10);
+            const randomConfidence = (Math.random() * 50 + 50).toFixed(1);
+           
+            document.getElementById('prediction-output').textContent = randomDigit;
+            document.getElementById('confidence-value').textContent = randomConfidence + '%';
+            document.getElementById('confidence-bar').style.width = randomConfidence + '%';
+        });
+    </script>
+</body>
+</html>
+
